@@ -66,6 +66,13 @@ func CreateRootAccountIfNeed() error {
 
 func chooseDB(envName string) (*gorm.DB, error) {
 	dsn := os.Getenv(envName)
+	if envName == "SQL_DSN" {
+		if postgresURL := os.Getenv("POSTGRES_URL"); postgresURL != "" {
+			dsn = postgresURL
+		} else if os.Getenv("VERCEL") != "" {
+			return nil, fmt.Errorf("POSTGRES_URL is required on Vercel; refusing to fall back to SQLite")
+		}
+	}
 
 	switch {
 	case strings.HasPrefix(dsn, "postgres://") || strings.HasPrefix(dsn, "postgresql://"):
