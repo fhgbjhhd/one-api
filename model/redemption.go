@@ -8,6 +8,7 @@ import (
 	"gorm.io/gorm"
 
 	"github.com/songquanpeng/one-api/common"
+	"github.com/songquanpeng/one-api/common/config"
 	"github.com/songquanpeng/one-api/common/helper"
 )
 
@@ -59,6 +60,8 @@ func Redeem(ctx context.Context, key string, userId int) (quota int64, err error
 		return 0, errors.New("无效的 user id")
 	}
 	redemption := &Redemption{}
+	var inviterId int
+	var bonusQuota int64
 
 	keyCol := "`key`"
 	if common.UsingPostgreSQL {
@@ -73,9 +76,23 @@ func Redeem(ctx context.Context, key string, userId int) (quota int64, err error
 		if redemption.Status != RedemptionCodeStatusEnabled {
 			return errors.New("该兑换码已被使用")
 		}
+		user := &User{}
+		if err = tx.Select("id", "inviter_id").Where("id = ?", userId).First(user).Error; err != nil {
+			return err
+		}
 		err = tx.Model(&User{}).Where("id = ?", userId).Update("quota", gorm.Expr("quota + ?", redemption.Quota)).Error
 		if err != nil {
 			return err
+		}
+		if config.PromotionEnabled && config.RechargeBonus > 0 && user.InviterId != 0 {
+			bonusQuota = int64(float64(redemption.Quota) * config.RechargeBonus)
+			if bonusQuota > 0 {
+				inviterId = user.InviterId
+				err = tx.Model(&User{}).Where("id = ?", inviterId).Update("quota", gorm.Expr("quota + ?", bonusQuota)).Error
+				if err != nil {
+					return err
+				}
+			}
 		}
 		redemption.RedeemedTime = helper.GetTimestamp()
 		redemption.Status = RedemptionCodeStatusUsed
@@ -86,6 +103,9 @@ func Redeem(ctx context.Context, key string, userId int) (quota int64, err error
 		return 0, errors.New("兑换失败，" + err.Error())
 	}
 	RecordLog(ctx, userId, LogTypeTopup, fmt.Sprintf("通过兑换码充值 %s", common.LogQuota(redemption.Quota)))
+	if inviterId != 0 && bonusQuota > 0 {
+		RecordLog(ctx, inviterId, LogTypeTopup, fmt.Sprintf("邀请用户充值返利 %s", common.LogQuota(bonusQuota)))
+	}
 	return redemption.Quota, nil
 }
 

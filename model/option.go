@@ -65,6 +65,8 @@ func InitOptionMap() {
 	config.OptionMap["QuotaForNewUser"] = strconv.FormatInt(config.QuotaForNewUser, 10)
 	config.OptionMap["QuotaForInviter"] = strconv.FormatInt(config.QuotaForInviter, 10)
 	config.OptionMap["QuotaForInvitee"] = strconv.FormatInt(config.QuotaForInvitee, 10)
+	config.OptionMap["PromotionEnabled"] = strconv.FormatBool(config.PromotionEnabled)
+	config.OptionMap["RechargeBonus"] = strconv.FormatFloat(config.RechargeBonus, 'f', -1, 64)
 	config.OptionMap["QuotaRemindThreshold"] = strconv.FormatInt(config.QuotaRemindThreshold, 10)
 	config.OptionMap["PreConsumedQuota"] = strconv.FormatInt(config.PreConsumedQuota, 10)
 	config.OptionMap["ModelRatio"] = billingratio.ModelRatio2JSONString()
@@ -153,6 +155,8 @@ func updateOptionMap(key string, value string) (err error) {
 			config.DisplayInCurrencyEnabled = boolValue
 		case "DisplayTokenStatEnabled":
 			config.DisplayTokenStatEnabled = boolValue
+		case "PromotionEnabled":
+			config.PromotionEnabled = boolValue
 		}
 	}
 	switch key {
@@ -217,6 +221,8 @@ func updateOptionMap(key string, value string) (err error) {
 		config.QuotaForInviter, _ = strconv.ParseInt(value, 10, 64)
 	case "QuotaForInvitee":
 		config.QuotaForInvitee, _ = strconv.ParseInt(value, 10, 64)
+	case "RechargeBonus":
+		config.RechargeBonus, _ = strconv.ParseFloat(value, 64)
 	case "QuotaRemindThreshold":
 		config.QuotaRemindThreshold, _ = strconv.ParseInt(value, 10, 64)
 	case "PreConsumedQuota":

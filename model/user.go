@@ -135,7 +135,7 @@ func (user *User) Insert(ctx context.Context, inviterId int) error {
 	if config.QuotaForNewUser > 0 {
 		RecordLog(ctx, user.Id, LogTypeSystem, fmt.Sprintf("新用户注册赠送 %s", common.LogQuota(config.QuotaForNewUser)))
 	}
-	if inviterId != 0 {
+	if config.PromotionEnabled && inviterId != 0 {
 		if config.QuotaForInvitee > 0 {
 			_ = IncreaseUserQuota(user.Id, config.QuotaForInvitee)
 			RecordLog(ctx, user.Id, LogTypeSystem, fmt.Sprintf("使用邀请码赠送 %s", common.LogQuota(config.QuotaForInvitee)))
