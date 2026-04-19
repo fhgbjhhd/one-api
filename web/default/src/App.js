@@ -306,6 +306,14 @@ function App() {
           </PrivateRoute>
         }
       />
+      <Route
+        path='/panel'
+        element={
+          <PrivateRoute>
+            <Dashboard />
+          </PrivateRoute>
+        }
+      />
       <Route path='*' element={<NotFound />} />
     </Routes>
   );
