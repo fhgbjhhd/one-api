@@ -47,6 +47,11 @@ func Init() {
 	if os.Getenv("SQLITE_PATH") != "" {
 		SQLitePath = os.Getenv("SQLITE_PATH")
 	}
+	if os.Getenv("LOG_DIR") != "" {
+		*LogDir = os.Getenv("LOG_DIR")
+	} else if os.Getenv("VERCEL") != "" {
+		*LogDir = filepath.Join(os.TempDir(), "one-api-logs")
+	}
 	if *LogDir != "" {
 		var err error
 		*LogDir, err = filepath.Abs(*LogDir)
