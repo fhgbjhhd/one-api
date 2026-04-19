@@ -1,0 +1,205 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>CyberFlow AI Gateway</title>
+    <style>
+      :root {
+        color-scheme: dark;
+        --bg: #070807;
+        --panel: #111411;
+        --ink: #f7f5ea;
+        --muted: #aeb7aa;
+        --gold: #f4c84a;
+        --green: #28d17c;
+        --line: rgba(244, 200, 74, 0.26);
+        --danger: #ff5a68;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        min-height: 100vh;
+        display: grid;
+        place-items: center;
+        background:
+          linear-gradient(135deg, rgba(40, 209, 124, 0.16), transparent 34%),
+          linear-gradient(220deg, rgba(244, 200, 74, 0.18), transparent 38%),
+          var(--bg);
+        color: var(--ink);
+        font-family:
+          Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,
+          "Segoe UI", sans-serif;
+      }
+
+      main {
+        width: min(92vw, 460px);
+        padding: 34px;
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        background: rgba(17, 20, 17, 0.9);
+        box-shadow: 0 28px 80px rgba(0, 0, 0, 0.42);
+      }
+
+      .eyebrow {
+        margin: 0 0 12px;
+        color: var(--gold);
+        font-size: 13px;
+        font-weight: 800;
+        letter-spacing: 0;
+        text-transform: uppercase;
+      }
+
+      h1 {
+        margin: 0;
+        font-size: 34px;
+        line-height: 1.08;
+      }
+
+      p {
+        color: var(--muted);
+        line-height: 1.6;
+      }
+
+      form {
+        display: grid;
+        gap: 14px;
+        margin-top: 24px;
+      }
+
+      label {
+        display: grid;
+        gap: 8px;
+        color: var(--muted);
+        font-size: 14px;
+        font-weight: 700;
+      }
+
+      input {
+        width: 100%;
+        min-height: 48px;
+        border: 1px solid rgba(247, 245, 234, 0.18);
+        border-radius: 8px;
+        background: #070807;
+        color: var(--ink);
+        font-size: 16px;
+        padding: 0 14px;
+        outline: none;
+      }
+
+      input:focus {
+        border-color: var(--gold);
+      }
+
+      button {
+        min-height: 50px;
+        border: 0;
+        border-radius: 8px;
+        background: linear-gradient(135deg, var(--gold), var(--green));
+        color: #071008;
+        cursor: pointer;
+        font-size: 16px;
+        font-weight: 900;
+      }
+
+      button:disabled {
+        cursor: wait;
+        opacity: 0.72;
+      }
+
+      .status {
+        min-height: 24px;
+        margin: 14px 0 0;
+        color: var(--muted);
+        font-size: 14px;
+      }
+
+      .status.error {
+        color: var(--danger);
+      }
+
+      .status.ok {
+        color: var(--green);
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <p class="eyebrow">CyberFlow AI Gateway</p>
+      <h1>登录控制台</h1>
+      <p>管理 API 渠道、令牌和数字帝国的后台入口。</p>
+
+      <form id="login-form">
+        <label>
+          用户名
+          <input name="username" autocomplete="username" required />
+        </label>
+        <label>
+          密码
+          <input name="password" type="password" autocomplete="current-password" required />
+        </label>
+        <button type="submit">进入控制台</button>
+      </form>
+
+      <p id="status" class="status">正在检查网关状态...</p>
+    </main>
+
+    <script>
+      const form = document.querySelector("#login-form");
+      const button = form.querySelector("button");
+      const statusEl = document.querySelector("#status");
+
+      function setStatus(message, type = "") {
+        statusEl.textContent = message;
+        statusEl.className = `status ${type}`.trim();
+      }
+
+      async function checkStatus() {
+        try {
+          const response = await fetch("/api/status", { credentials: "include" });
+          const payload = await response.json();
+          if (payload.success) {
+            setStatus(`${payload.data.system_name || "One API"} 已就绪`, "ok");
+          } else {
+            setStatus(payload.message || "网关状态未知", "error");
+          }
+        } catch (error) {
+          setStatus("网关未返回状态，请稍后重试", "error");
+        }
+      }
+
+      form.addEventListener("submit", async (event) => {
+        event.preventDefault();
+        button.disabled = true;
+        setStatus("正在登录...");
+
+        const data = Object.fromEntries(new FormData(form).entries());
+
+        try {
+          const response = await fetch("/api/user/login", {
+            method: "POST",
+            credentials: "include",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(data),
+          });
+          const payload = await response.json();
+          if (payload.success) {
+            setStatus("登录成功，控制台会话已建立。", "ok");
+          } else {
+            setStatus(payload.message || "登录失败", "error");
+          }
+        } catch (error) {
+          setStatus("登录请求失败，请检查网络或稍后重试。", "error");
+        } finally {
+          button.disabled = false;
+        }
+      });
+
+      checkStatus();
+    </script>
+  </body>
+</html>
