@@ -37,11 +37,11 @@ var ModelRatio = map[string]float64{
 	"gpt-4-turbo-preview":     5,     // $0.01 / 1K tokens
 	"gpt-4-turbo":             5,     // $0.01 / 1K tokens
 	"gpt-4-turbo-2024-04-09":  5,     // $0.01 / 1K tokens
-	"gpt-4o":                  2.5,   // $0.005 / 1K tokens
-	"chatgpt-4o-latest":       2.5,   // $0.005 / 1K tokens
-	"gpt-4o-2024-05-13":       2.5,   // $0.005 / 1K tokens
-	"gpt-4o-2024-08-06":       1.25,  // $0.0025 / 1K tokens
-	"gpt-4o-2024-11-20":       1.25,  // $0.0025 / 1K tokens
+	"gpt-4o":                  1.1,
+	"chatgpt-4o-latest":       1.1,
+	"gpt-4o-2024-05-13":       1.1,
+	"gpt-4o-2024-08-06":       1.1,
+	"gpt-4o-2024-11-20":       1.1,
 	"gpt-4o-mini":             0.075, // $0.00015 / 1K tokens
 	"gpt-4o-mini-2024-07-18":  0.075, // $0.00015 / 1K tokens
 	"gpt-4-vision-preview":    5,     // $0.01 / 1K tokens
@@ -95,9 +95,9 @@ var ModelRatio = map[string]float64{
 	"claude-3-5-haiku-20241022":  1.0 / 1000 * USD,
 	"claude-3-5-haiku-latest":    1.0 / 1000 * USD,
 	"claude-3-sonnet-20240229":   3.0 / 1000 * USD,
-	"claude-3-5-sonnet-20240620": 3.0 / 1000 * USD,
-	"claude-3-5-sonnet-20241022": 3.0 / 1000 * USD,
-	"claude-3-5-sonnet-latest":   3.0 / 1000 * USD,
+	"claude-3-5-sonnet-20240620": 1.1,
+	"claude-3-5-sonnet-20241022": 1.1,
+	"claude-3-5-sonnet-latest":   1.1,
 	"claude-3-opus-20240229":     15.0 / 1000 * USD,
 	// https://cloud.baidu.com/doc/WENXINWORKSHOP/s/hlrk4akp7
 	"ERNIE-4.0-8K":       0.120 * RMB,
@@ -123,9 +123,9 @@ var ModelRatio = map[string]float64{
 	// "gemma-2-27b-it":                      0,
 	"gemini-pro":                          0.25 * MILLI_USD, // $0.00025 / 1k characters -> $0.001 / 1k tokens
 	"gemini-1.0-pro":                      0.125 * MILLI_USD,
-	"gemini-1.5-pro":                      1.25 * MILLI_USD,
-	"gemini-1.5-pro-001":                  1.25 * MILLI_USD,
-	"gemini-1.5-pro-experimental":         1.25 * MILLI_USD,
+	"gemini-1.5-pro":                      1.1,
+	"gemini-1.5-pro-001":                  1.1,
+	"gemini-1.5-pro-experimental":         1.1,
 	"gemini-1.5-flash":                    0.075 * MILLI_USD,
 	"gemini-1.5-flash-001":                0.075 * MILLI_USD,
 	"gemini-1.5-flash-8b":                 0.0375 * MILLI_USD,
@@ -240,14 +240,14 @@ var ModelRatio = map[string]float64{
 	"ali-stable-diffusion-xl":       8.00,
 	"ali-stable-diffusion-v1.5":     8.00,
 	"wanx-v1":                       8.00,
-	"deepseek-r1":                   0.002 * RMB,
-	"deepseek-v3":                   0.001 * RMB,
-	"deepseek-r1-distill-qwen-1.5b": 0.001 * RMB,
-	"deepseek-r1-distill-qwen-7b":   0.0005 * RMB,
-	"deepseek-r1-distill-qwen-14b":  0.001 * RMB,
-	"deepseek-r1-distill-qwen-32b":  0.002 * RMB,
-	"deepseek-r1-distill-llama-8b":  0.0005 * RMB,
-	"deepseek-r1-distill-llama-70b": 0.004 * RMB,
+	"deepseek-r1":                   0.1,
+	"deepseek-v3":                   0.1,
+	"deepseek-r1-distill-qwen-1.5b": 0.1,
+	"deepseek-r1-distill-qwen-7b":   0.1,
+	"deepseek-r1-distill-qwen-14b":  0.1,
+	"deepseek-r1-distill-qwen-32b":  0.1,
+	"deepseek-r1-distill-llama-8b":  0.1,
+	"deepseek-r1-distill-llama-70b": 0.1,
 	"SparkDesk":                     1.2858, // ￥0.018 / 1k tokens
 	"SparkDesk-v1.1":                1.2858, // ￥0.018 / 1k tokens
 	"SparkDesk-v2.1":                1.2858, // ￥0.018 / 1k tokens
@@ -274,9 +274,10 @@ var ModelRatio = map[string]float64{
 	"hunyuan-vision":            0.018 * RMB,
 	"hunyuan-embedding":         0.0007 * RMB,
 	// https://platform.moonshot.cn/pricing
-	"moonshot-v1-8k":   0.012 * RMB,
-	"moonshot-v1-32k":  0.024 * RMB,
-	"moonshot-v1-128k": 0.06 * RMB,
+	"kimi-latest":      0.1,
+	"moonshot-v1-8k":   0.1,
+	"moonshot-v1-32k":  0.1,
+	"moonshot-v1-128k": 0.1,
 	// https://platform.baichuan-ai.com/price
 	"Baichuan2-Turbo":      0.008 * RMB,
 	"Baichuan2-Turbo-192k": 0.016 * RMB,
@@ -321,7 +322,7 @@ var ModelRatio = map[string]float64{
 	"step-1-128k":  0.040 / 1000 * RMB,
 	"step-1-256k":  0.095 / 1000 * RMB,
 	"step-1-flash": 0.001 / 1000 * RMB,
-	"step-2-16k":   0.038 / 1000 * RMB,
+	"step-2-16k":   0.1,
 	"step-1v-8k":   0.005 / 1000 * RMB,
 	"step-1v-32k":  0.015 / 1000 * RMB,
 	// aws llama3 https://aws.amazon.com/cn/bedrock/pricing/
@@ -335,8 +336,8 @@ var ModelRatio = map[string]float64{
 	"command-r":             0.5 / 1000 * USD,
 	"command-r-plus":        3.0 / 1000 * USD,
 	// https://platform.deepseek.com/api-docs/pricing/
-	"deepseek-chat":     0.14 * MILLI_USD,
-	"deepseek-reasoner": 0.55 * MILLI_USD,
+	"deepseek-chat":     0.1,
+	"deepseek-reasoner": 0.1,
 	// https://www.deepl.com/pro?cta=header-prices
 	"deepl-zh": 25.0 / 1000 * USD,
 	"deepl-en": 25.0 / 1000 * USD,
@@ -435,16 +436,16 @@ var ModelRatio = map[string]float64{
 	"cohere/command-r-plus-08-2024":                   4.75,
 	"cohere/command-r7b-12-2024":                      0.075,
 	"databricks/dbrx-instruct":                        0.6,
-	"deepseek/deepseek-chat":                          0.445,
-	"deepseek/deepseek-chat-v2.5":                     1.0,
+	"deepseek/deepseek-chat":                          0.1,
+	"deepseek/deepseek-chat-v2.5":                     0.1,
 	"deepseek/deepseek-chat:free":                     0.0,
-	"deepseek/deepseek-r1":                            1.2,
-	"deepseek/deepseek-r1-distill-llama-70b":          0.345,
+	"deepseek/deepseek-r1":                            0.1,
+	"deepseek/deepseek-r1-distill-llama-70b":          0.1,
 	"deepseek/deepseek-r1-distill-llama-70b:free":     0.0,
-	"deepseek/deepseek-r1-distill-llama-8b":           0.02,
-	"deepseek/deepseek-r1-distill-qwen-1.5b":          0.09,
-	"deepseek/deepseek-r1-distill-qwen-14b":           0.075,
-	"deepseek/deepseek-r1-distill-qwen-32b":           0.09,
+	"deepseek/deepseek-r1-distill-llama-8b":           0.1,
+	"deepseek/deepseek-r1-distill-qwen-1.5b":          0.1,
+	"deepseek/deepseek-r1-distill-qwen-14b":           0.1,
+	"deepseek/deepseek-r1-distill-qwen-32b":           0.1,
 	"deepseek/deepseek-r1:free":                       0.0,
 	"eva-unit-01/eva-llama-3.33-70b":                  3.0,
 	"eva-unit-01/eva-qwen-2.5-32b":                    1.7,
@@ -628,8 +629,8 @@ var CompletionRatio = map[string]float64{
 	// whisper
 	"whisper-1": 0, // only count input tokens
 	// deepseek
-	"deepseek-chat":     0.28 / 0.14,
-	"deepseek-reasoner": 2.19 / 0.55,
+	"deepseek-chat":     1,
+	"deepseek-reasoner": 1,
 }
 
 var (

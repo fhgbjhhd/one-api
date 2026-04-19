@@ -115,6 +115,24 @@ const TopupCard = () => {
           </Button>
         </Stack>
       </SubCard>
+      <SubCard
+        title="全球 Token 结算 / Global Token Settlement"
+        sx={{
+          marginTop: '24px'
+        }}
+      >
+        <Stack spacing={1.5}>
+          <Typography variant="body1">
+            支持 Coinbase Checkout 或自定义 USDT 支付流程。完成支付后，系统通过兑换码发放额度，适合欧美与东南亚用户分发。
+          </Typography>
+          <Typography variant="body2" color={theme.palette.grey[700]}>
+            Coinbase or USDT payments can be settled through a redemption code. Use the order ID or Telegram/Email account as the memo so support can match payment to code delivery.
+          </Typography>
+          <Typography variant="body2" color={theme.palette.grey[700]}>
+            International distribution: create redemption batches in the admin panel, deliver one code per user, and ask users to redeem here before calling the API.
+          </Typography>
+        </Stack>
+      </SubCard>
     </UserCard>
   );
 };

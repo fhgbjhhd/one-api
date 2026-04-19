@@ -33,6 +33,11 @@
       "success": "充值成功！",
       "request_failed": "请求失败",
       "no_link": "超级管理员未设置充值链接！"
+    },
+    "global_payment": {
+      "title": "全球 Token 结算 / Global Token Settlement",
+      "coinbase_usdt": "支持 Coinbase Checkout 或自定义 USDT 支付流程。完成支付后，通过兑换码发放额度，适合欧美与东南亚用户分发。",
+      "redemption_distribution": "国际分发逻辑：管理员批量创建兑换码，每位用户领取一个兑换码，并在本页兑换后开始调用 API。"
     }
   },
   "channel": {

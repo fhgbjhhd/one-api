@@ -33,6 +33,11 @@
       "success": "Top up successful!",
       "request_failed": "Request failed",
       "no_link": "Admin has not set up the top-up link!"
+    },
+    "global_payment": {
+      "title": "Global Token Settlement",
+      "coinbase_usdt": "Coinbase Checkout or custom USDT payment flows can issue compute credits through redemption codes after settlement.",
+      "redemption_distribution": "International distribution: admins create redemption-code batches, deliver one code per user, and users redeem here before calling the API."
     }
   },
   "channel": {

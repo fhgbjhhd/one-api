@@ -244,6 +244,18 @@ const TopUp = () => {
               </Card>
             </Grid.Column>
           </Grid>
+          <Divider />
+          <Card fluid>
+            <Card.Content>
+              <Card.Header>
+                <Header as='h3'>{t('topup.global_payment.title')}</Header>
+              </Card.Header>
+              <Card.Description>
+                <p>{t('topup.global_payment.coinbase_usdt')}</p>
+                <p>{t('topup.global_payment.redemption_distribution')}</p>
+              </Card.Description>
+            </Card.Content>
+          </Card>
         </Card.Content>
       </Card>
     </div>

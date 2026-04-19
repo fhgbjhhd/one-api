@@ -6,7 +6,7 @@ const defaultConfig = {
     base_url: '',
     other: '',
     model_mapping: '',
-    models: [],
+    models: ['gpt-4o'],
     groups: ['default'],
     config: {}
   },
@@ -57,7 +57,7 @@ const typeConfig = {
   },
   14: {
     input: {
-      models: ['claude-instant-1', 'claude-2', 'claude-2.0', 'claude-2.1']
+      models: ['claude-3-5-sonnet-20241022', 'claude-3-5-sonnet-latest', 'claude-instant-1', 'claude-2', 'claude-2.0', 'claude-2.1']
     },
     modelGroup: 'anthropic'
   },
@@ -126,7 +126,7 @@ const typeConfig = {
       other: '版本号'
     },
     input: {
-      models: ['gemini-pro']
+      models: ['gemini-1.5-pro', 'gemini-1.5-flash', 'gemini-pro']
     },
     prompt: {
       other: '请输入版本号，例如：v1'
@@ -135,7 +135,7 @@ const typeConfig = {
   },
   25: {
     input: {
-      models: ['moonshot-v1-8k', 'moonshot-v1-32k', 'moonshot-v1-128k']
+      models: ['kimi-latest', 'moonshot-v1-8k', 'moonshot-v1-32k', 'moonshot-v1-128k']
     },
     modelGroup: 'moonshot'
   },
@@ -159,6 +159,12 @@ const typeConfig = {
   },
   31: {
     modelGroup: 'lingyiwanwu'
+  },
+  32: {
+    input: {
+      models: ['step-2-16k', 'step-1-32k', 'step-1-8k']
+    },
+    modelGroup: 'stepfun'
   },
   33: {
     inputLabel: {

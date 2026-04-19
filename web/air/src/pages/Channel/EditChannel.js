@@ -88,13 +88,16 @@ const EditChannel = (props) => {
                     localModels = ['hunyuan'];
                     break;
                 case 24:
-                    localModels = ['gemini-pro', 'gemini-pro-vision'];
+                    localModels = ['gemini-1.5-pro', 'gemini-1.5-flash', 'gemini-pro', 'gemini-pro-vision'];
                     break;
                 case 25:
-                    localModels = ['moonshot-v1-8k', 'moonshot-v1-32k', 'moonshot-v1-128k'];
+                    localModels = ['kimi-latest', 'moonshot-v1-8k', 'moonshot-v1-32k', 'moonshot-v1-128k'];
                     break;
                 case 26:
                     localModels = ['glm-4', 'glm-4v', 'glm-3-turbo'];
+                    break;
+                case 32:
+                    localModels = ['step-2-16k', 'step-1-32k', 'step-1-8k'];
                     break;
                 case 2:
                     localModels = ['mj_imagine', 'mj_variation', 'mj_reroll', 'mj_blend', 'mj_upscale', 'mj_describe'];
