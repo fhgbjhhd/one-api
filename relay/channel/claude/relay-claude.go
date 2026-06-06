@@ -223,6 +223,12 @@ func RequestOpenAI2ClaudeMessage(c *gin.Context, textRequest dto.GeneralOpenAIRe
 		}
 	}
 
+	// Anthropic rejects requests with both temperature and top_p set simultaneously.
+	// Drop top_p when temperature is also set, as temperature is the primary control.
+	if claudeRequest.Temperature != nil && claudeRequest.TopP != nil {
+		claudeRequest.TopP = nil
+	}
+
 	// 指定了 reasoning 参数,覆盖 budgetTokens
 	if textRequest.Reasoning != nil {
 		var reasoning openrouter.RequestReasoning
